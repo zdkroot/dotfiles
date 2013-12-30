@@ -1,113 +1,85 @@
-# Mathias’s dotfiles
+#OS X 10.9 Clean Install
+You should check out Mathias [awesome README](https://github.com/mathiasbynens/dotfiles) for more on using these dotfiles.
+##Sublime
+[Mensch coding font](http://robey.lag.net/2010/06/21/mensch-font.html)
 
-## Installation
-
-### Using Git and the bootstrap script
-
-You can clone the repository wherever you want. (I like to keep it in `~/Projects/dotfiles`, with `~/dotfiles` as a symlink.) The bootstrapper script will pull in the latest version and copy the files to your home folder.
-
+This is normally installed in .cask but I am using the [Sublime 3 beta.](http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%20Build%203059.dmg)
+####Install package manager
+	`import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())`
+##Xcode + tools
+`Xcode > Preferences > Downloads > Command Line Tools`
+##Git
 ```bash
-git clone https://github.com/mathiasbynens/dotfiles.git && cd dotfiles && source bootstrap.sh
+ssh-keygen -t rsa -C "zdkroot@gmail.com"
+
+#copy ssh key to github.com
+vim ~/.ssh/id_rsa.pub
+
+#test connection
+ssh -T git@github.com
 ```
-
-To update, `cd` into your local `dotfiles` repository and then:
-
+##[Dotfiles](https://github.com/zdkroot/dotfiles)
 ```bash
+git clone git@github.com:zdkroot/dotfiles.git ~/dotfiles && cd ~/dotfiles
 source bootstrap.sh
-```
-
-Alternatively, to update while avoiding the confirmation prompt:
-
-```bash
-set -- -f; source bootstrap.sh
-```
-
-### Git-free install
-
-To install these dotfiles without Git:
-
-```bash
-cd; curl -#L https://github.com/mathiasbynens/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,bootstrap.sh,LICENSE-MIT.txt}
-```
-
-To update later on, just run that command again.
-
-### Specify the `$PATH`
-
-If `~/.path` exists, it will be sourced along with the other files, before any feature testing (such as [detecting which version of `ls` is being used](https://github.com/mathiasbynens/dotfiles/blob/aff769fd75225d8f2e481185a71d5e05b76002dc/.aliases#L21-26)) takes place.
-
-Here’s an example `~/.path` file that adds `~/utils` to the `$PATH`:
-
-```bash
-export PATH="$HOME/utils:$PATH"
-```
-
-### Add custom commands without creating a new fork
-
-If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
-
-My `~/.extra` looks something like this:
-
-```bash
-# Git credentials
-# Not in the repository, to prevent people from accidentally committing under my name
-GIT_AUTHOR_NAME="Mathias Bynens"
-GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-git config --global user.name "$GIT_AUTHOR_NAME"
-GIT_AUTHOR_EMAIL="mathias@mailinator.com"
-GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-git config --global user.email "$GIT_AUTHOR_EMAIL"
-```
-
-You could also use `~/.extra` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/mathiasbynens/dotfiles/fork) instead, though.
-
-### Sensible OS X defaults
-
-When setting up a new Mac, you may want to set some sensible OS X defaults:
-
-```bash
+.. && source install-deps.sh
 ./.osx
-```
-
-### Install Homebrew formulae
-
-When setting up a new Mac, you may want to install some common [Homebrew](http://brew.sh/) formulae (after installing Homebrew, of course):
-
-```bash
-brew bundle ~/Brewfile
-```
-
-### Install native apps with `brew cask`
-
-You could also install native apps with [`brew cask`](https://github.com/phinze/homebrew-cask):
-
-```bash
+brew bundle Brewfile
 ./.cask
 ```
+##Apache/PHP/Mysql
+###Apache
+#####Enable PHP
+Enable php in `/etc/apache2/httpd.conf` simply by uncommenting:
+`LoadModule php5_module libexec/apache2/libphp5.so`
+#####User directory web root
+```bash
+Include /private/etc/apache2/extra/httpd-userdir.conf
+mkdir ~/Sites
+```
+#####Vhosts
+`Include /private/etc/apache2/extra/httpd-vhosts.conf`
+```xml
+# /etc/apache2/extra/httpd-vhosts.conf
 
-## Feedback
+<VirtualHost *:80>
+    DocumentRoot "/Users/user/Sites/"
+    ServerName localhost
+</VirtualHost>
+```
 
-Suggestions/improvements
-[welcome](https://github.com/mathiasbynens/dotfiles/issues)!
+###PHP
+####Extensions
+#####Mcrypt
+Homebrew will have already conf directory for us at `/usr/local/etc/php/5.4/conf.d` when building mcrypt.
+We will put our other extension configs there as well.
 
-## Author
+Lets add `extension_dir = "/usr/local/etc/php/5.4/conf.d"` to php.ini
 
-| [![twitter/mathias](http://gravatar.com/avatar/24e08a9ea84deb17ae121074d0f17125?s=70)](http://twitter.com/mathias "Follow @mathias on Twitter") |
-|---|
-| [Mathias Bynens](http://mathiasbynens.be/) |
+#####Xdebug
+```ini
+; /usr/local/etc/php/5.4/conf.d/ext-xdebug.ini
 
-## Thanks to…
+[xdebug]
+zend_extension = "/usr/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so"
+xdebug.remote_enable = 1
+xdebug.profiler_enable = 1
+xdebug.profiler_enable_trigger = 1
+xdebug.auto_trace = On
+xdebug.show_exception_trace = On
+xdebug.profiler_output_dir = /tmp
+```
+###Mysql
+```bash
+#set admin password
+mysqladmin -uroot password new_password`
 
-* @ptb and [his _OS X Lion Setup_ repository](https://github.com/ptb/Mac-OS-X-Lion-Setup)
-* [Ben Alman](http://benalman.com/) and his [dotfiles repository](https://github.com/cowboy/dotfiles)
-* [Chris Gerke](http://www.randomsquared.com/) and his [tutorial on creating an OS X SOE master image](http://chris-gerke.blogspot.com/2012/04/mac-osx-soe-master-image-day-7.html) + [_Insta_ repository](https://github.com/cgerke/Insta)
-* [Cãtãlin Mariş](https://github.com/alrra) and his [dotfiles repository](https://github.com/alrra/dotfiles)
-* [Gianni Chiappetta](http://gf3.ca/) for sharing his [amazing collection of dotfiles](https://github.com/gf3/dotfiles)
-* [Jan Moesen](http://jan.moesen.nu/) and his [ancient `.bash_profile`](https://gist.github.com/1156154) + [shiny _tilde_ repository](https://github.com/janmoesen/tilde)
-* [Lauri ‘Lri’ Ranta](http://lri.me/) for sharing [loads of hidden preferences](http://osxnotes.net/defaults.html)
-* [Matijs Brinkhuis](http://hotfusion.nl/) and his [dotfiles repository](https://github.com/matijs/dotfiles)
-* [Nicolas Gallagher](http://nicolasgallagher.com/) and his [dotfiles repository](https://github.com/necolas/dotfiles)
-* [Sindre Sorhus](http://sindresorhus.com/)
-* [Tom Ryder](http://blog.sanctum.geek.nz/) and his [dotfiles repository](https://github.com/tejr/dotfiles)
+#setup daemon
+launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 
-* anyone who [contributed a patch](https://github.com/mathiasbynens/dotfiles/contributors) or [made a helpful suggestion](https://github.com/mathiasbynens/dotfiles/issues)
+#Set up databases to run as your user account
+unset TMPDIR && mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+
+#start mysql
+mysql.server start
+```

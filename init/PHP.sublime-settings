@@ -1,9 +1,13 @@
 {
+	"auto_indent": true,
 	"detect_indentation": false,
+	"extensions":
+	[
+		"mh"
+	],
+	"indent_subsequent_lines": true,
+	"smart_indent": true,
 	"tab_size": 3,
 	"translate_tabs_to_spaces": false,
-	"use_tab_stops": true,
-	"auto_indent": true,
-	"smart_indent": true,
-	"indent_subsequent_lines": true
+	"use_tab_stops": true
 }

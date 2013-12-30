@@ -43,6 +43,9 @@ install rename
 install tree
 # install webkit2png
 install zopfli
+install mysql --devel
+install mcrypt
+install php54-mcrypt
 
 tap homebrew/versions
 # install lua52

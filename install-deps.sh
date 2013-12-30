@@ -6,10 +6,15 @@ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 # https://github.com/rupa/z
 # z, oh how i love you
-mkdir ~/bin && cd ~/bin
+cd ~/bin
 git clone https://github.com/rupa/z.git
 chmod +x ~/bin/z/z.sh
 # also consider moving over your current .z file if possible. it's painful to rebuild :)
+
+# All hail composer
+cd ~/bin
+curl -sS https://getcomposer.org/installer | php
+mv composer.phar composer
 
 # https://github.com/dronir/SpotifyControl
 # Spotify Controll Script
