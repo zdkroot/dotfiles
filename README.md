@@ -39,7 +39,7 @@ mkdir ~/Sites
 ```
 #####Vhosts
 `Include /private/etc/apache2/extra/httpd-vhosts.conf`
-```xml
+```conf
 # /etc/apache2/extra/httpd-vhosts.conf
 
 <VirtualHost *:80>
@@ -72,7 +72,7 @@ xdebug.profiler_output_dir = /tmp
 ###Mysql
 ```bash
 #set admin password
-mysqladmin -uroot password new_password`
+mysqladmin -uroot password new_password
 
 #setup daemon
 launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
