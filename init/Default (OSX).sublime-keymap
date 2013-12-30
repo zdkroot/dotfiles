@@ -1,0 +1,11 @@
+[
+		{ "keys": ["super+shift++"], "command": "goto_definition" },
+		{ "keys": ["j", "j"], "command": "exit_insert_mode",
+			"context":
+			[
+				{ "key": "setting.command_mode", "operand": false },
+				{ "key": "setting.is_widget", "operand": false }
+			]
+		},
+		{ "keys": ["f10"], "command": "reindent", "args": {"single_line": false} }
+]

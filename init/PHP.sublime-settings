@@ -1,0 +1,9 @@
+{
+	"detect_indentation": false,
+	"tab_size": 3,
+	"translate_tabs_to_spaces": false,
+	"use_tab_stops": true,
+	"auto_indent": true,
+	"smart_indent": true,
+	"indent_subsequent_lines": true
+}
