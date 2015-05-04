@@ -18,10 +18,10 @@ mv composer.phar composer
 
 # https://github.com/dronir/SpotifyControl
 # Spotify Controll Script
-cd ~/bin
-git clone git://github.com/dronir/SpotifyControl.git
+# cd ~/bin
+# git clone git://github.com/dronir/SpotifyControl.git
 
 # https://github.com/jeroenbegyn/VLCControl
 # VLC Controll Script
-cd ~/bin
-git clone git://github.com/jeroenbegyn/VLCControl.git
+# cd ~/bin
+# git clone git://github.com/jeroenbegyn/VLCControl.git

@@ -14,6 +14,7 @@ install bash
 
 # Install wget with IRI support
 install wget --enable-iri
+install irssi
 
 # Install RingoJS and Narwhal
 # Note that the order in which these are installed is important; see http://git.io/brew-narwhal-ringo.
@@ -24,7 +25,7 @@ install wget --enable-iri
 install vim --override-system-vi
 tap homebrew/dupes
 install homebrew/dupes/grep
-tap josegonzalez/homebrew-php
+# tap josegonzalez/homebrew-php
 # install php55
 
 # This formula didn’t work well last time I tried it:
@@ -43,9 +44,9 @@ install rename
 install tree
 # install webkit2png
 install zopfli
-install mysql --devel
+# install mysql --devel
 install mcrypt
-install php54-mcrypt
+# install php54-mcrypt
 
 tap homebrew/versions
 # install lua52

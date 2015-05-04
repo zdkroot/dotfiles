@@ -18,6 +18,7 @@ installcask macvim
 installcask the-unarchiver
 installcask tor-browser
 installcask transmission
+installcask alfred
 # installcask ukelele
 # installcask virtualbox
 installcask vlc

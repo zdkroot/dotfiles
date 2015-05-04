@@ -1,5 +1,12 @@
 # Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH"
+export PATH="/opt/local/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="$PATH:$HOME/bin"
+
+export PATH="$PATH:$(brew --prefix php54)/bin"
+export PATH="$PATH:$(brew --prefix python)/bin"
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+export PATH="$PATH:/usr/local/lib/android-sdk-macosx/tools"
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
