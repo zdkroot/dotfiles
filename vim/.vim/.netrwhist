@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/private/etc/apache2'
+let g:netrw_dirhist_2='/private/etc/apache2/virtualhosts'
+let g:netrw_dirhist_3='/Users/zack/Sites/medhub'
+let g:netrw_dirhist_4='/Users/zack/Sites/medhub/includes'
+let g:netrw_dirhist_5='/Users/zack/Sites/medhub/includes/common'
