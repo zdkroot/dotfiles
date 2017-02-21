@@ -5,6 +5,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
+alias chrome="open /Applications/Google\ Chrome\ Canary.app/"
 
 # Shortcuts
 alias d="cd ~/Documents/Dropbox"
@@ -16,6 +17,9 @@ alias v="vim"
 alias h="history"
 alias j="jobs"
 alias s="subl"
+alias so="source"
+alias vless="vim -u /usr/local/Cellar/vim/7.4.253/share/vim/vim74/macros/less.vim"
+alias yt="mpsyt"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -146,3 +150,8 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
+
+function git_current_branch() {
+      git symbolic-ref HEAD 2> /dev/null | sed -e 's/refs\/heads\///'
+}
+alias gup="g fetch origin; g rebase -p origin/$(git_current_branch)"
